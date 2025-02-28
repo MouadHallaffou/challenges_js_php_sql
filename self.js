@@ -75,3 +75,46 @@ function findByName(name, table=[]){
 //14:
 
 
+
+//15:
+// console.log(itCompanies.sort());
+
+//16:
+// console.log(itCompanies.reverse());
+
+//17:
+// console.log(itCompanies.slice(0,3));
+
+//18:
+// console.log(itCompanies.slice(itCompanies.length-3,itCompanies.length));
+
+//19:
+
+
+//20:
+//Séparez l’entreprise informatique intermédiaire ou les entreprises du réseau
+// let intermédiaire = ["IBM", "Oracle", "Microsoft"]; 
+// console.log(itCompanies.filter(name => intermédiaire.includes(name)));
+// console.log(itCompanies.filter(name => !intermédiaire.includes(name)));
+
+//21:
+let intermédiaire = ["IBM", "Oracle", "Microsoft"]; 
+let groupe1 = itCompanies.filter(name => intermédiaire.includes(name));
+let groupe2 = itCompanies.filter(name => !intermédiaire.includes(name));
+console.log(groupe1);
+// console.log(groupe1.slice(0,1));
+
+//22:
+// console.log(milieuElement(groupe1));
+
+
+
+
+
+
+
+
+
+
+
+
