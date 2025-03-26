@@ -98,14 +98,18 @@ function findByName(name, table=[]){
 // console.log(itCompanies.filter(name => !intermédiaire.includes(name)));
 
 //21:
-let intermédiaire = ["IBM", "Oracle", "Microsoft"]; 
-let groupe1 = itCompanies.filter(name => intermédiaire.includes(name));
-let groupe2 = itCompanies.filter(name => !intermédiaire.includes(name));
-console.log(groupe1);
+const intermédiaire = ["IBM", "Oracle", "Microsoft"]; 
+const groupe1 = itCompanies.filter(name => intermédiaire.includes(name));
+const groupe2 = itCompanies.filter(name => !intermédiaire.includes(name));
+// console.log(groupe1); //output: [ 'Microsoft', 'IBM', 'Oracle' ]
 // console.log(groupe1.slice(0,1));
 
 //22:
-// console.log(milieuElement(groupe1));
+// console.log(groupe1.slice(groupe1.length/2));
+
+//23:
+console.log(groupe1.slice(groupe1.length-1));
+
 
 
 
