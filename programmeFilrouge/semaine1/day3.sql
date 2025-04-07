@@ -21,4 +21,4 @@ select * from employes
 order by salaire DESC;
 select e.name , e.department from employes where salaire >  2500 AND departement ='IT';
 
-select * employes where name like %e% And departement ='finance';
+select * employes where name like %e% And departement = 'finance';
