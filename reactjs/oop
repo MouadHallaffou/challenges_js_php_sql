@@ -1,0 +1,270 @@
+Documentation : Programmation Orientée Objet (POO) en PHP
+Introduction à la POO en PHP
+La Programmation Orientée Objet (POO) est un paradigme de programmation qui permet d'organiser le code autour du concept d'"objets" plutôt que d'actions et de logique. PHP supporte pleinement la POO depuis sa version 5.
+
+Concepts fondamentaux
+Classe : Plan de construction pour les objets (comme un modèle)
+
+Objet : Instance d'une classe
+
+Propriétés : Variables internes à une classe (attributs)
+
+Méthodes : Fonctions internes à une classe
+
+Visibilité : Contrôle d'accès (public, protected, private)
+
+Les 4 piliers de la POO
+1. Encapsulation
+Protéger les données internes d'un objet en contrôlant l'accès via des méthodes.
+
+php
+Copy
+class BankAccount {
+    private float $balance;
+
+    public function getBalance(): float {
+        return $this->balance;
+    }
+
+    public function deposit(float $amount): void {
+        if ($amount > 0) {
+            $this->balance += $amount;
+        }
+    }
+}
+2. Héritage
+Une classe peut hériter des propriétés et méthodes d'une autre classe.
+
+php
+Copy
+class Animal {
+    public function eat(): string {
+        return "Je mange";
+    }
+}
+
+class Dog extends Animal {
+    public function bark(): string {
+        return "Woof!";
+    }
+}
+
+$dog = new Dog();
+echo $dog->eat();  // Hérité de Animal
+echo $dog->bark(); // Spécifique à Dog
+3. Polymorphisme
+Capacité d'un objet à prendre plusieurs formes, souvent via l'override de méthodes.
+
+php
+Copy
+abstract class Shape {
+    abstract public function area(): float;
+}
+
+class Circle extends Shape {
+    public function __construct(private float $radius) {}
+    
+    public function area(): float {
+        return pi() * pow($this->radius, 2);
+    }
+}
+
+class Square extends Shape {
+    public function __construct(private float $side) {}
+    
+    public function area(): float {
+        return pow($this->side, 2);
+    }
+}
+
+function printArea(Shape $shape) {
+    echo "Aire : " . $shape->area();
+}
+
+printArea(new Circle(5)); // Affiche l'aire du cercle
+printArea(new Square(4)); // Affiche l'aire du carré
+4. Abstraction
+Simplification de la complexité en ne montrant que l'essentiel.
+
+php
+Copy
+interface PaymentGateway {
+    public function processPayment(float $amount): bool;
+}
+
+class PayPal implements PaymentGateway {
+    public function processPayment(float $amount): bool {
+        // Implémentation spécifique à PayPal
+        return true;
+    }
+}
+
+class Stripe implements PaymentGateway {
+    public function processPayment(float $amount): bool {
+        // Implémentation spécifique à Stripe
+        return true;
+    }
+}
+
+function checkout(PaymentGateway $gateway, float $amount) {
+    $gateway->processPayment($amount);
+}
+Concepts avancés en POO PHP
+Interfaces
+Contrats qui définissent ce qu'une classe doit implémenter.
+
+php
+Copy
+interface Logger {
+    public function log(string $message): void;
+}
+
+class FileLogger implements Logger {
+    public function log(string $message): void {
+        file_put_contents('app.log', $message, FILE_APPEND);
+    }
+}
+Classes abstraites
+Classes qui ne peuvent pas être instanciées directement.
+
+php
+Copy
+abstract class DatabaseModel {
+    abstract public function save(): bool;
+    
+    public function delete(): bool {
+        // Implémentation commune
+        return true;
+    }
+}
+
+class User extends DatabaseModel {
+    public function save(): bool {
+        // Implémentation spécifique
+        return true;
+    }
+}
+Traits
+Mécanisme de réutilisation de code dans les langages à héritage simple.
+
+php
+Copy
+trait Loggable {
+    public function log(string $message): void {
+        echo "[LOG] " . $message;
+    }
+}
+
+class Product {
+    use Loggable;
+    
+    public function save() {
+        $this->log("Produit sauvegardé");
+    }
+}
+Méthodes et propriétés statiques
+Appartenant à la classe plutôt qu'à l'instance.
+
+php
+Copy
+class MathUtils {
+    public static function add(float $a, float $b): float {
+        return $a + $b;
+    }
+}
+
+echo MathUtils::add(5, 3); // 8
+Bonnes pratiques POO en PHP
+SOLID : Principes de conception objet
+
+S: Single Responsibility
+
+O: Open/Closed
+
+L: Liskov Substitution
+
+I: Interface Segregation
+
+D: Dependency Inversion
+
+Type hinting : Déclarer les types des paramètres et retours
+
+Properties typing : Typage des propriétés depuis PHP 7.4
+
+Composition over inheritance : Préférer la composition à l'héritage
+
+Dependency Injection : Passer les dépendances plutôt que de les créer
+
+Exemple complet : Système de bibliothèque
+php
+Copy
+interface Borrowable {
+    public function borrow(): void;
+    public function return(): void;
+    public function isAvailable(): bool;
+}
+
+abstract class LibraryItem {
+    public function __construct(
+        protected string $title,
+        protected string $author,
+        protected int $year
+    ) {}
+    
+    abstract public function getDetails(): string;
+}
+
+class Book extends LibraryItem implements Borrowable {
+    private bool $isBorrowed = false;
+    
+    public function borrow(): void {
+        if ($this->isBorrowed) {
+            throw new Exception("Livre déjà emprunté");
+        }
+        $this->isBorrowed = true;
+    }
+    
+    public function return(): void {
+        $this->isBorrowed = false;
+    }
+    
+    public function isAvailable(): bool {
+        return !$this->isBorrowed;
+    }
+    
+    public function getDetails(): string {
+        return sprintf(
+            "Livre: %s (%d) par %s - %s",
+            $this->title,
+            $this->year,
+            $this->author,
+            $this->isAvailable() ? "Disponible" : "Emprunté"
+        );
+    }
+}
+
+class DVD extends LibraryItem {
+    private int $duration; // en minutes
+    
+    public function __construct(string $title, string $director, int $year, int $duration) {
+        parent::__construct($title, $director, $year);
+        $this->duration = $duration;
+    }
+    
+    public function getDetails(): string {
+        return sprintf(
+            "DVD: %s (%d) - Durée: %d minutes",
+            $this->title,
+            $this->year,
+            $this->duration
+        );
+    }
+}
+
+// Utilisation
+$book = new Book("Clean Code", "Robert Martin", 2008);
+$book->borrow();
+echo $book->getDetails();
+
+$dvd = new DVD("Inception", "Christopher Nolan", 2010, 148);
+echo $dvd->getDetails();

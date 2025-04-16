@@ -23,7 +23,7 @@ let compresed = (string) => {
 //ex2 :
 // Input: [4, 2, 1, 6, 5]
 // Output: [[1, 2], [4, 5, 6]]
-let input = [4, 2, 1, 6, 5];
+let input = [1, 2, 2, 3, 5, 6, 6, 7];
 
 let separation = (table) => {
     let result = [];
@@ -45,7 +45,7 @@ let separation = (table) => {
             group = []; 
         }
     }
-    
+
     return result;
 };
 

@@ -1,0 +1,16 @@
+1 Qu’est-ce qu’un composant React ?
+Un composant est une fonction JavaScript qui retourne du JSX (la version HTML de React).
+Chaque composant est réutilisable, isolé, et peut recevoir des props (valeurs dynamiques)
+
+JSX te permet d’écrire du HTML dans du JavaScript !!!
+
+2. Les props (abréviation de properties) sont des paramètres qu’on passe à un composant pour le rendre dynamique et réutilisable.
+
+3. <> </> est un Fragment en React. Il remplace une <div> inutile quand tu veux retourner plusieurs éléments sans créer de balise en trop dans le HTML final.
+
+4. useState est un hook (une fonction spéciale de React) qui permet de gérer l’état (state) dans un composant fonctionnel.
+
+En gros, c’est ce qui te permet de :
+. stocker une donnée (comme un compteur, un texte, un booléen…)
+. la modifier dynamiquement quand l’utilisateur interagit
+. re-render le composant automatiquement quand la valeur change
