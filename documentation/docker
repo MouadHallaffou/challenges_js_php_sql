@@ -1,0 +1,7 @@
+Docker               | La plateforme
+Docker Engine        | Le moteur d’exécution
+Docker CLI           | L’interface pour écrire les commandes
+Dockerfile           | Fichier pour créer une image d’un service
+docker-compose.yml   | Fichier pour gérer plusieurs services (containers)
+
+

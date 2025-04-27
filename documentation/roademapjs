@@ -1,0 +1,39 @@
+🔁 Manipulation des tableaux (Array)
+📌 Méthodes importantes :
+push(), pop(), shift(), unshift()
+
+map(), filter(), reduce()
+
+forEach(), find(), some(), every()
+
+includes(), indexOf(), sort(), slice(), splice(), concat()
+
+🧱 Manipulation des objets (Object)
+📌 Concepts clés :
+Accès aux propriétés : obj.key, obj['key']
+
+Boucles : for...in, Object.keys(), Object.entries()
+
+Clonage : Object.assign(), spread {...obj}
+
+Destructuration : const {x, y} = obj
+
+🔤 Manipulation des chaînes (String)
+📌 Méthodes utiles :
+charAt(), includes(), indexOf(), slice(), substring()
+
+toUpperCase(), toLowerCase(), split(), replace(), trim()
+
+🔍 Ensuite :
+Quand tu seras prêt, on passera aux concepts JavaScript + ES6+ :
+
+let, const, arrow functions
+
+template literals, spread/rest, destructuring
+
+Promises, async/await
+
+classes, modules, import/export
+
+this, closure, hoisting, scope
+

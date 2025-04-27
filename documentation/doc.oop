@@ -1,0 +1,4 @@
+class user  (id , mane , email , activite);
+class activite (id, name|create activite , getactivitedetails )
+class exercice (id, objectif)
+class mile (calorise)

@@ -32,5 +32,18 @@ let separation = (table) => {
   };
 };
 
-console.log(separation(table));
+// console.log(separation(table));
+
+
+const getLentgth = (data) => {
+  let count = 0;
+
+  for(; data[count] ; count++){
+
+  }
+  return count;
+}
+
+console.log(getLentgth([1,2,3,4,5]));
+console.log(getLentgth("hello world"));
 

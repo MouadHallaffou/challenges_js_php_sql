@@ -1,0 +1,125 @@
+les etapes de l'exution du code js :
+1 - parsing
+2 - compilation 
+3 - execution 
+
+1 // Quelle est la différence entre une base de donnés relationnelle et non relationelle ?
+Les bases de données relationnelles (RDBMS) stockent les données dans des tables avec des relations entre elles, en utilisant des clés primaires et étrangères. Elles utilisent un schéma strict (types, contraintes, etc.).
+Les bases de données non relationnelles (NoSQL) stockent les données sous différents formats :
+Documents (ex : MongoDB – JSON/BSON)
+Clé-valeur (ex : Redis)
+Colonnes (ex : Cassandra)
+Graphes (ex : Neo4j)
+Elles sont plus flexibles, scalables horizontalement, et souvent utilisées dans les applications modernes (temps réel, big data, etc.).
+
+2//Quelle est la différence entre SQL et MySQL ?
+SQL (Structured Query Language) est un langage standard utilisé pour gérer et interroger des bases de données relationnelles. Il permet de faire des opérations comme : SELECT, INSERT, UPDATE, DELETE, etc.
+MySQL est un Système de Gestion de Base de Données Relationnelle (RDBMS) qui utilise le langage SQL pour gérer les données. C’est l’un des RDBMS les plus populaires et open-source
+
+3//Qu'est-ce qu'une transaction en SQL et pourquoi est-il important d'utiliser des transactions dans une base de données relationnelle ? 
+Une transaction en SQL est un ensemble d'opérations (comme INSERT, UPDATE, DELETE) exécutées comme une seule unité logique.
+Elle garantit que soit toutes les opérations réussissent, soit aucune n’est appliquée. Cela assure la cohérence des données.
+Les transactions sont essentielles pour :
+éviter les données corrompues,
+garantir l’intégrité même en cas de panne ou erreur,
+assurer que plusieurs utilisateurs peuvent travailler en même temps sans conflits.
+
+4//Quelles sont les meilleures pratiques pour sécuriser les bases de données SQL contre les attaques par injection SQL ?
+Pour sécuriser une base de données contre les attaques par injection SQL, voici les bonnes pratiques essentielles :
+Utiliser des requêtes préparées (prepared statements) avec bind_param (en mysqli) ou bindValue (en PDO)✅
+🔒 Cela empêche les entrées utilisateur d’être interprétées comme du code SQL.
+Valider et filtrer toutes les entrées utilisateurs :
+Utiliser filter_input(), filter_var() en PHP
+Valider les formats d’e-mails, de nombres, etc.
+Éviter de construire des requêtes SQL dynamiquement avec des variables (genre : "... WHERE id = $id" ❌)
+Utiliser des rôles et permissions limités dans la base :
+Ne jamais utiliser le compte root en production !
+Appliquer le principe du moindre privilège
+Tenir à jour le SGBD et corriger les failles connues (patch de sécurité)
+Ne jamais afficher d'erreur SQL brute à l'utilisateur (mysqli_error() ou PDOException) – ça peut révéler la structure de la BDD ❌
+
+5//Pouvez-vous expliquer la différence entre les commandes TRUNCATE et DELETE en SQL ?
+DELETE : permet de supprimer une ou plusieurs lignes d’une table. Tu peux utiliser une condition WHERE.
+C’est une commande DML (Data Manipulation Language), elle est loggable (tu peux la rollback).
+TRUNCATE : supprime toutes les lignes d’une table plus rapidement, mais sans possibilité de condition.
+C’est une commande DDL (Data Definition Language), irréversible dans la majorité des cas.
+Elle réinitialise les clés AUTO_INCREMENT et ne déclenche pas les triggers ON DELETE.
+
+6//Qu'est-ce qu'une jointure en SQL et quelles sont les différentes types de jointures ?
+Une jointure en SQL est une opération qui permet de combiner des données de plusieurs tables en fonction d’une condition logique (souvent l’égalité entre une clé primaire et une clé étrangère).
+Les jointures sont utilisées pour rassembler des informations liées réparties dans différentes tables.
+🔗 Types de jointures :
+INNER JOIN	::: Retourne les lignes qui ont une correspondance dans les deux tables
+LEFT JOIN (LEFT OUTER)	::: Retourne toutes les lignes de la table de gauche, et les correspondances dans la table de droite (ou NULL)
+RIGHT JOIN (RIGHT OUTER) ::: Retourne toutes les lignes de la table de droite, et les correspondances dans la table de gauche (ou NULL)
+FULL OUTER JOIN	::: Retourne toutes les lignes de toutes les tables, avec des NULL si pas de correspondance
+
+7// Quelle est la différence entre les fonctions GROUP BY et HAVING en SQL ?
+En SQL, les clauses GROUP BY et HAVING sont souvent utilisées ensemble, mais elles ont des rôles différents :
+🔹 GROUP BY : sert à regrouper les lignes qui ont des valeurs identiques dans une ou plusieurs colonnes, afin de faire des calculs agrégés (SUM(), AVG(), COUNT(), etc.).
+🔹 HAVING : permet de filtrer les groupes créés par GROUP BY, après l’agrégation.
+Contrairement à WHERE, qui filtre les lignes brutes, HAVING filtre les résultats agrégés.
+
+8//Qu'est-ce que la sous-requête (subquery) en SQL et comment l'utilise-t-on dans une requête ?
+Une sous-requête (subquery) en SQL est une requête imbriquée dans une autre requête. Elle permet de :
+Filtrer les données (dans WHERE)
+Récupérer une valeur à insérer dans la requête principale (dans SELECT)
+Créer une table temporaire (dans FROM)
+Elle est souvent utilisée avec des opérateurs comme IN, EXISTS, =, >, etc.
+📌 Exemple:
+sql
+
+-- Afficher les noms des utilisateurs ayant un job
+SELECT name
+FROM users
+WHERE id IN (
+  SELECT user_id
+  FROM job
+);
+
+9//Pouvez-vous expliquer la différence entre les commandes ALTER et UPDATE en SQL ?
+En SQL, les commandes ALTER et UPDATE ont des objectifs totalement différents :
+ALTER sert à modifier la structure d'une table (ajouter, modifier ou supprimer une colonne, changer un type de données, etc.)
+UPDATE sert à modifier les données existantes dans les lignes d’une table
+
+-- Ajouter une colonne
+ALTER TABLE users ADD COLUMN age INT;
+-- Supprimer une colonne
+ALTER TABLE users DROP COLUMN age;
+-- Modifier le type d'une colonne
+ALTER TABLE users MODIFY COLUMN name VARCHAR(100);
+
+-- Modifier une donnée précise
+UPDATE users
+SET name = 'Mouad'
+WHERE id = 1;
+-- Modifier toutes les lignes
+UPDATE users
+SET active = 0;
+
+10//Commande pour créer une nouvelle table dans une base de données SQL ?
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+11//Qu'est-ce qu'une clé primaire (PRIMARY KEY) dans une table SQL, et pourquoi est-elle importante ?
+Une clé primaire (PRIMARY KEY) est une colonne (ou un ensemble de colonnes) qui permet d’identifier de façon unique chaque ligne d’une table.
+Elle a deux propriétés fondamentales :
+UNIQUE : chaque valeur doit être différente
+NOT NULL : aucune valeur ne peut être nulle
+Elle est essentielle car :
+Elle garantit l'unicité des enregistrements
+Elle est utilisée dans les jointures (comme clé étrangère dans une autre table)
+Elle permet une indexation efficace pour la recherche des données
+
+12//Pouvez-vous expliquer la différence entre les fonctions SQL COUNT(), SUM(), AVG(), et MAX() ?
+Fonction,	Description,	Exemple
+COUNT(),	Compte le nombre de lignes ou de valeurs non nulles,	SELECT COUNT(*) FROM users;
+SUM(),	Calcule la somme des valeurs numériques dans une colonne,	SELECT SUM(price) FROM orders;
+AVG(),	Calcule la moyenne arithmétique,	SELECT AVG(score) FROM students;
+MAX(),	Retourne la valeur maximale d’une colonne,	SELECT MAX(salary) FROM employees;
+
+13//Qu'est-ce qu'une fonction d'agrégation SQL ?
+Une fonction d’agrégation en SQL est une fonction qui résume ou agrège plusieurs lignes de données pour retourner une seule valeur.
+Ces fonctions sont souvent utilisées avec GROUP BY pour regrouper les résultats par catégories.
